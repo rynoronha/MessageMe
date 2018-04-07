@@ -13,7 +13,7 @@ body {
 .room-list {
   float: left;
   min-height: 100%;
-  width: 30%;
+  width: 40%;
   height: 100vh;
   background-color: #BBB7B7;
 }
