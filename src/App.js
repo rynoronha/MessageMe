@@ -2,21 +2,33 @@ import React, { Component } from 'react';
 import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
+import MessageList from './components/MessageList';
 
 
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCqoa3Tq8k8eBCDQCjNenJm33lyjQkh-ho",
-    authDomain: "bloc-chat-react-65b4a.firebaseapp.com",
-    databaseURL: "https://bloc-chat-react-65b4a.firebaseio.com",
-    projectId: "bloc-chat-react-65b4a",
-    storageBucket: "bloc-chat-react-65b4a.appspot.com",
-    messagingSenderId: "845354416806"
-  };
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyCqoa3Tq8k8eBCDQCjNenJm33lyjQkh-ho",
+  authDomain: "bloc-chat-react-65b4a.firebaseapp.com",
+  databaseURL: "https://bloc-chat-react-65b4a.firebaseio.com",
+  projectId: "bloc-chat-react-65b4a",
+  storageBucket: "bloc-chat-react-65b4a.appspot.com",
+  messagingSenderId: "845354416806"
+};
+
   firebase.initializeApp(config);
 
 
+
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeRoom: 'Room1'
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -26,6 +38,13 @@ class App extends Component {
         <div className="room-list">
           <RoomList
             firebase={firebase}
+          />
+        </div>
+
+        <div className="message-list">
+          <MessageList
+            firebase={firebase}
+            activeRoom={this.state.activeRoom}
           />
         </div>
       </div>
