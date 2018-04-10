@@ -5,12 +5,7 @@ class MessageList extends Component {
     super(props);
 
     this.state = {
-        messages: [{
-          username: '',
-          content: '',
-          sentAt: '',
-          roomId: ''
-        }]
+        messages: []
     };
 
 
@@ -46,6 +41,7 @@ class MessageList extends Component {
   }
 
    render() {
+     console.log(this.state.messages);
      return (
        <section className="message-list">
         <h2 className="active-room">{this.props.activeRoom}</h2>
