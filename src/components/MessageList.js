@@ -41,7 +41,6 @@ class MessageList extends Component {
   }
 
    render() {
-     console.log(this.state.messages);
      return (
        <section className="message-list">
         <h2 className="active-room">{this.props.activeRoom}</h2>
@@ -55,9 +54,6 @@ class MessageList extends Component {
             </div>
         )}
         </div>
-
-
-
        </section>
      )
    }

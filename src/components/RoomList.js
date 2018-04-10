@@ -70,21 +70,28 @@ class RoomList extends Component {
           </FormGroup>
          </Form>
 
-        <Button id="new-room" bsStyle="primary" onClick={this.handleShow}>New Room</Button>
+        <Button id="new-room" bsStyle="primary"
+          onClick={this.handleShow}>New Room
+        </Button>
         <Modal
           id="new-room-modal"
           show={this.state.show}
           onHide={this.handleClose}
         >
           <Modal.Header>
-            <Modal.Title>Create New Room</Modal.Title>
+            <Modal.Title>Create a New Room</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Enter a room name</p>
+            <FormControl
+              type="text"
+              placeholder="enter room name"
+              value={ this.state.newRoomName }
+              onChange={ (e) => this.handleChange(e) }
+            />
           </Modal.Body>
           <Modal.Footer>
-            <Button id="modal-cancel" onClick={this.handleClose}>Cancel</Button>
-            <Button id="modal-create-room" bsStyle="primary">Create Room</Button>
+              <Button id="modal-cancel" onClick={this.handleClose}>Cancel</Button>
+              <Button id="modal-create-room" bsStyle="primary" onClick={ (e) => this.createRoom(e) }>Create Room</Button>
           </Modal.Footer>
         </Modal>
 
