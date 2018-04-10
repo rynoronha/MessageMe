@@ -43,6 +43,7 @@ class RoomList extends Component {
     e.preventDefault();
     this.roomsRef.push({name: this.state.newRoomName});
     this.setState({newRoomName: ''});
+    this.setState({ show: false });
   }
 
   selectRoom(room, key) {
@@ -54,21 +55,6 @@ class RoomList extends Component {
      return (
        <section className="room-list">
         <h3>Rooms</h3>
-        <Form onSubmit={ (e) => this.createRoom(e) }>
-          <FormGroup id="form-new-room-name">
-            <ControlLabel>New Room</ControlLabel>{' '}
-            <FormControl
-              type="text"
-              placeholder="enter room name"
-              value={ this.state.newRoomName }
-              onChange={ (e) => this.handleChange(e) }
-            />
-          </FormGroup>
-
-          <FormGroup>
-           <Button type="submit">Create Room</Button>
-          </FormGroup>
-         </Form>
 
         <Button id="new-room" bsStyle="primary"
           onClick={this.handleShow}>New Room

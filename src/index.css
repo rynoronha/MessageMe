@@ -9,24 +9,40 @@ body {
   height: 100%;
 }
 
-h1 {
-  padding-top: 40px;
+
+.App-title {
+  font-size: 50px;
+  text-align: center;
 }
 
+.user {
+  float: right;
+  margin-top: -10px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.welcome-user {
+  font-size: 15px;
+}
 .room-list {
   float: left;
   min-height: 100%;
-  width: 40%;
+  padding-left: 20px;
+  width: 30%;
   height: 100vh;
   background-color: #eeeeee;
 }
 
-#form-new-room-name {
-  width: 100%;
-}
 
 .room-name {
   color: #5D5959;
+  background-color: yellow;
 }
 
 .active-room {
@@ -67,11 +83,6 @@ h1 {
   font-style: italic;
   font-size: x-small;
   float: right;
-  margin-top: -65px;
+  margin-top: -50px;
   margin-right: 10px;
-}
-
-#new-room-modal {
-  z-index: 0;
-  position: relative;
 }
