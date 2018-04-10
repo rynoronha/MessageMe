@@ -14,8 +14,8 @@ class RoomList extends Component {
 
     this.roomsRef = this.props.firebase.database().ref('rooms');
 
-    /*this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);*/
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
 
   }
 
@@ -53,7 +53,7 @@ class RoomList extends Component {
   render() {
      return (
        <section className="room-list">
-        <h3>Room List</h3>
+        <h3>Rooms</h3>
         <Form onSubmit={ (e) => this.createRoom(e) }>
           <FormGroup id="form-new-room-name">
             <ControlLabel>New Room</ControlLabel>{' '}
@@ -70,8 +70,9 @@ class RoomList extends Component {
           </FormGroup>
          </Form>
 
-        {/*<Button id="new-room" bsStyle="primary" onClick={this.handleShow}>New Room</Button>
+        <Button id="new-room" bsStyle="primary" onClick={this.handleShow}>New Room</Button>
         <Modal
+          id="new-room-modal"
           show={this.state.show}
           onHide={this.handleClose}
         >
@@ -85,7 +86,7 @@ class RoomList extends Component {
             <Button id="modal-cancel" onClick={this.handleClose}>Cancel</Button>
             <Button id="modal-create-room" bsStyle="primary">Create Room</Button>
           </Modal.Footer>
-        </Modal> */}
+        </Modal>
 
         {
             this.state.rooms.map( (room)  =>

@@ -9,15 +9,69 @@ body {
   height: 100%;
 }
 
+h1 {
+  padding-top: 40px;
+}
 
 .room-list {
   float: left;
   min-height: 100%;
   width: 40%;
   height: 100vh;
-  background-color: #BBB7B7;
+  background-color: #eeeeee;
+}
+
+#form-new-room-name {
+  width: 100%;
 }
 
 .room-name {
   color: #5D5959;
+}
+
+.active-room {
+  padding-top: 10px;
+  height: 70px;
+}
+
+.message:nth-child(odd){
+  background-color: #dbdcff;
+
+}
+
+.message:nth-child(even){
+  background-color: #f9d3d3;
+}
+
+
+.message {
+  padding: 1px;
+}
+
+
+
+.message-username {
+  font-weight: bold;
+  text-align: left;
+  text-indent: 20px;
+  margin-top: 10px;
+}
+
+.message-content {
+  text-align: left;
+  text-indent: 20px;
+  margin-top: -10px;
+}
+
+.message-time {
+  font-style: italic;
+  font-size: x-small;
+  float: right;
+  margin-top: -65px;
+  margin-right: 10px;
+}
+
+#new-room-modal {
+  z-index: 0;
+  position: relative;
 }
