@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
+import { Button, Form, FormControl, ControlLabel} from 'react-bootstrap';
 
 class MessageList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-        messages: []
+        messages: [],
+        currentMessage: ''
     };
 
-
     this.messagesRef = this.props.firebase.database().ref('messages');
-
 
   }
 
@@ -40,7 +40,39 @@ class MessageList extends Component {
 
   }
 
+  handleChange(e) {
+    this.setState({ currentMessage: e.target.value })
+  }
+
+  sendMessage(e) {
+    e.preventDefault();
+    this.messagesRef.push({
+      content: this.state.currentMessage,
+      username: this.props.username,
+      roomId: this.props.activeRoomKey,
+      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP
+    });
+    this.setState({currentMessage: ''});
+    this.setState({ show: false });
+  }
+
+  showNewMessageform() {
+    if (this.props.activeRoom !== null) {
+      return <Form inline id="new-message-form">
+        <FormControl
+          id="new-message-text"
+          type="text"
+          placeholder="type message"
+          value={ this.state.currentMessage }
+          onChange={ (e) => this.handleChange(e) }
+        />
+        <Button id="send-message" bsStyle="success" onClick={ (e) => this.sendMessage(e) }>Send</Button>
+      </Form>
+    }
+  }
+
    render() {
+     console.log(this.state.messages);
      return (
        <section className="message-list">
         <h2 className="active-room">{this.props.activeRoom}</h2>
@@ -53,6 +85,11 @@ class MessageList extends Component {
               <p className="message-time">{this.formatTime(message.sentAt)}</p>
             </div>
         )}
+        </div>
+        <div className='footer'>
+        <footer id="new-message-footer">
+          {this.showNewMessageform()}
+        </footer>
         </div>
        </section>
      )

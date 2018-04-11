@@ -39,6 +39,12 @@ class RoomList extends Component {
     this.setState({ newRoomName: e.target.value })
   }
 
+  keyPress(e) {
+    if (e.keyCode === 13 ) {
+      this.createRoom(e);
+    }
+  }
+
   createRoom(e) {
     e.preventDefault();
     this.roomsRef.push({name: this.state.newRoomName});
@@ -73,6 +79,7 @@ class RoomList extends Component {
               placeholder="enter room name"
               value={ this.state.newRoomName }
               onChange={ (e) => this.handleChange(e) }
+              onKeyDown={ (e) => this.keyPress(e)}
             />
           </Modal.Body>
           <Modal.Footer>
