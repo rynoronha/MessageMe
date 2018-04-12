@@ -107,8 +107,8 @@ class RoomList extends Component {
                   <p>{room.name}</p>
               </span>
                   <button id="delete-room" onClick={() => this.deleteRoom(room.key)}>Delete</button>
-            </div
 
+            </div>
 
        )}
        </section>
