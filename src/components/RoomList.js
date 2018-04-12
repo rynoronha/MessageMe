@@ -99,7 +99,7 @@ class RoomList extends Component {
 
         {
             this.state.rooms.map( (room)  =>
-            <div>
+            <div id="rooms">
               <span className="room-name"
                 key={room.key}
                 onClick={(e) => this.selectRoom(room.name, room.key, e)}
