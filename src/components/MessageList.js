@@ -44,6 +44,12 @@ class MessageList extends Component {
     this.setState({ currentMessage: e.target.value })
   }
 
+  keyPress(e) {
+    if (e.keyCode === 13 ) {
+      this.sendMessage(e);
+    }
+  }
+
   sendMessage(e) {
     e.preventDefault();
     this.messagesRef.push({
@@ -65,6 +71,7 @@ class MessageList extends Component {
           placeholder="type message"
           value={ this.state.currentMessage }
           onChange={ (e) => this.handleChange(e) }
+          onKeyDown={ (e) => this.keyPress(e)}
         />
         <Button id="send-message" bsStyle="success" onClick={ (e) => this.sendMessage(e) }>Send</Button>
       </Form>
@@ -72,7 +79,6 @@ class MessageList extends Component {
   }
 
    render() {
-     console.log(this.state.messages);
      return (
        <section className="message-list">
         <h2 className="active-room">{this.props.activeRoom}</h2>

@@ -57,13 +57,22 @@ class RoomList extends Component {
     this.props.setActiveRoomKey(key);
   }
 
+  deleteRoom(roomKey) {
+    const room = this.props.firebase.database().ref('rooms/' + roomKey);
+    room.remove();
+    const remainRooms= this.state.rooms.filter(room => room.key !== roomKey);
+    this.setState({ rooms: remainRooms});
+    this.selectRoom(null, null);
+    console.log(this.props.activeRoom);
+  }
+
   render() {
      return (
        <section className="room-list">
-        <h3>Rooms</h3>
+        <h3 id="rooms-heading">Rooms</h3>
 
         <Button id="new-room" bsStyle="primary"
-          onClick={this.handleShow}>New Room
+          onClick={this.handleShow}> + New Room
         </Button>
         <Modal
           id="new-room-modal"
@@ -90,12 +99,17 @@ class RoomList extends Component {
 
         {
             this.state.rooms.map( (room)  =>
+            <div>
               <span className="room-name"
                 key={room.key}
                 onClick={(e) => this.selectRoom(room.name, room.key, e)}
               >
                   <p>{room.name}</p>
               </span>
+                  <button id="delete-room" onClick={() => this.deleteRoom(room.key)}>Delete</button>
+            </div
+
+
        )}
        </section>
 
