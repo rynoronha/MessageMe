@@ -71,11 +71,21 @@ class MessageList extends Component {
         <div className="message-container">
         {
           this.props.messages.filter( message => message.roomId == this.props.activeRoomKey).map( message =>
+            <div id="message-container">
             <div className="message" key={message.key}>
               <p className="message-username">{message.username}</p>
               <p className="message-content">{message.content}</p>
               <p className="message-time">{this.formatTime(message.sentAt)}</p>
             </div>
+
+            <div id="delete-message-container">
+                <Button id="delete-message"
+                  bsStyle="danger"
+                  bsSize="xsmall"
+                  /*onClick={() => this.deleteRoom(room.key)}*/>x
+                </Button>
+            </div>
+          </div>
         )}
         </div>
         <div className='footer'>

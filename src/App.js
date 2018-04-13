@@ -60,8 +60,10 @@ class App extends Component {
 
   deleteMessagesInDeletedRoom(roomKey) {
     const message = firebase.database().ref('messages').orderByChild('roomId').equalTo(roomKey);
-    console.log(roomKey);
-    //message.remove();
+    message.on("child_added", function(snapshot) {
+      const m = firebase.database().ref('messages/' + snapshot.key);
+      m.remove();
+    });
 
   }
 

@@ -52,6 +52,18 @@ class RoomList extends Component {
     this.setState({ show: false });
   }
 
+  editRoomName(roomKey, e) {
+    if (e.keyCode === 13 ) {
+      e.preventDefault();
+      var updates = {};
+      updates['rooms/' + roomKey + '/' + 'name'] = e.target.innerText
+      this.props.firebase.database().ref().update(updates);
+      const rooms = this.roomsRef;
+      this.setState({ rooms: rooms});
+    }
+  }
+
+
   selectRoom(room, key) {
     this.props.setActiveRoom(room);
     this.props.setActiveRoomKey(key);
@@ -101,6 +113,8 @@ class RoomList extends Component {
             this.state.rooms.map( (room)  =>
             <div id="rooms">
               <span className="room-name"
+                contenteditable="true"
+                onKeyDown={ (e) => this.editRoomName(room.key, e) }
                 key={room.key}
                 onClick={(e) => this.selectRoom(room.name, room.key, e)}
               >
