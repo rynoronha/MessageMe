@@ -26,11 +26,22 @@ class App extends Component {
     super(props);
 
     this.state = {
-      activeRoom: '',
-      activeRoomKey: '',
-      username: null
+      activeRoom: null,
+      activeRoomKey: null,
+      username: null,
+      messages: []
     }
 
+    this.messagesRef = firebase.database().ref('messages');
+
+  }
+
+  componentDidMount() {
+    this.messagesRef.on('child_added', snapshot => {
+    const message = snapshot.val();
+    message.key = snapshot.key;
+    this.setState({ messages: this.state.messages.concat(message) });
+   });
   }
 
   setActiveRoom(room) {
@@ -41,10 +52,17 @@ class App extends Component {
     this.setState({ activeRoomKey: key})
   }
 
-  setUser(user){
+  setUser(user) {
     if (user === null) {
       return this.setState({ username: "Guest"})
     } else return this.setState({ username: user.displayName })
+  }
+
+  deleteMessagesInDeletedRoom(roomKey) {
+    const message = firebase.database().ref('messages').orderByChild('roomId').equalTo(roomKey);
+    console.log(roomKey);
+    //message.remove();
+
   }
 
   render() {
@@ -66,14 +84,18 @@ class App extends Component {
             activeRoom={this.state.activeRoom}
             setActiveRoom={this.setActiveRoom.bind(this)}
             setActiveRoomKey={this.setActiveRoomKey.bind(this)}
+            deleteMessagesInDeletedRoom={this.deleteMessagesInDeletedRoom.bind(this)}
           />
         </div>
 
         <div className="message-list">
           <MessageList
             firebase={firebase}
+            messages={this.state.messages}
+            messagesRef={this.messagesRef}
             activeRoom={this.state.activeRoom}
             activeRoomKey={this.state.activeRoomKey}
+            username={this.state.username}
           />
         </div>
 

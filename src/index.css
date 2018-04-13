@@ -2,6 +2,7 @@
 html, body {
   height: 100%;
 }
+
 body {
   margin: 0;
   padding: 0;
@@ -13,6 +14,9 @@ body {
 .App-title {
   font-size: 50px;
   text-align: center;
+  position: relative;
+  width: 90%;
+  padding-left: 100px;
 }
 
 .user {
@@ -30,6 +34,7 @@ body {
 .welcome-user {
   font-size: 15px;
 }
+
 .room-list {
   float: left;
   min-height: 100%;
@@ -39,32 +44,70 @@ body {
   background-color: #eeeeee;
 }
 
+#rooms-heading {
+  margin-left: -30px;
+  margin-bottom: -3px;
+}
+
+#new-room {
+  margin-left: 100px;
+  margin-top: -40px;
+}
 
 .room-name {
   color: #5D5959;
-  background-color: yellow;
+  float: left;
+  margin-top: 10px;
+  margin-left: -20px;
+  width: 420%;
+  text-align: left;
+  padding-top: 10px;
+  padding-left: 5px;
+  border-radius: 5px;
+  border: 2px solid black;
 }
+
 
 .active-room {
   padding-top: 10px;
   height: 70px;
+  width: 143%
 }
 
-.message:nth-child(odd){
-  background-color: #dbdcff;
+#delete-room {
+  float: left;
+  position: relative;
+  display: inline-block;
+  margin-left: 120px;
+  margin-top: -34px;
 
+}
+
+
+.message:nth-child(odd){
+  background-color: #cce5cc;
+  border-radius: 25px;
+  border: 2px solid black;
 }
 
 .message:nth-child(even){
-  background-color: #f9d3d3;
+  border-radius: 25px;
+  border: 2px solid black;
 }
-
 
 .message {
-  padding: 1px;
+  margin-bottom: 5px;
+  margin-right: 10px;
 }
 
+.message-list {
+  float: left;
+  width: 70%;
+}
 
+.message-container {
+  width: 143%;
+}
 
 .message-username {
   font-weight: bold;
@@ -85,4 +128,31 @@ body {
   float: right;
   margin-top: -50px;
   margin-right: 10px;
+}
+
+#new-message-footer {
+  float: left;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer {
+  float: left;
+}
+
+#new-message-form {
+  background-color: yellow;
+}
+
+#new-message-text {
+  float: left;
+  width: 700px;
+}
+
+#send-message {
+  position: fixed;
+  margin-left: -270px;
+  width: 150px;
+  background-color: #26a67e;
 }
