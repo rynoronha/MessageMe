@@ -1,27 +1,14 @@
 import React, { Component } from 'react';
-import { Button, Form, FormControl, ControlLabel} from 'react-bootstrap';
+import { Button, Form, FormControl} from 'react-bootstrap';
 
 class MessageList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-        messages: [],
         currentMessage: ''
     };
-
-    this.messagesRef = this.props.firebase.database().ref('messages');
-
   }
-
-  componentDidMount() {
-      this.messagesRef.on('child_added', snapshot => {
-      const message = snapshot.val();
-      message.key = snapshot.key;
-      this.setState({ messages: this.state.messages.concat(message) });
-
-     });
-   }
 
    formatTime(date) {
      var date = new Date(date);
@@ -37,7 +24,6 @@ class MessageList extends Component {
      minutes = minutes < 10 ? '0'+ minutes : minutes;
      var strTime = month + '/' + day + '/' + year + ' @ ' + hours + ':' + minutes + ' ' + ampm;
      return strTime;
-
   }
 
   handleChange(e) {
@@ -52,7 +38,7 @@ class MessageList extends Component {
 
   sendMessage(e) {
     e.preventDefault();
-    this.messagesRef.push({
+    this.props.messagesRef.push({
       content: this.state.currentMessage,
       username: this.props.username,
       roomId: this.props.activeRoomKey,
@@ -84,7 +70,7 @@ class MessageList extends Component {
         <h2 className="active-room">{this.props.activeRoom}</h2>
         <div className="message-container">
         {
-          this.state.messages.filter( message => message.roomId == this.props.activeRoomKey).map( message =>
+          this.props.messages.filter( message => message.roomId == this.props.activeRoomKey).map( message =>
             <div className="message" key={message.key}>
               <p className="message-username">{message.username}</p>
               <p className="message-content">{message.content}</p>

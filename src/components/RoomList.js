@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Form, Col, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { Button, Modal, FormControl} from 'react-bootstrap';
 
 class RoomList extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class RoomList extends Component {
     const remainRooms= this.state.rooms.filter(room => room.key !== roomKey);
     this.setState({ rooms: remainRooms});
     this.selectRoom(null, null);
-    console.log(this.props.activeRoom);
+    this.props.deleteMessagesInDeletedRoom(roomKey);
   }
 
   render() {
@@ -106,8 +106,10 @@ class RoomList extends Component {
               >
                   <p>{room.name}</p>
               </span>
-                  <button id="delete-room" onClick={() => this.deleteRoom(room.key)}>Delete</button>
 
+              <span id="delete-room-container">
+                  <button id="delete-room" onClick={() => this.deleteRoom(room.key)}>Delete</button>
+              </span>
             </div>
 
        )}
