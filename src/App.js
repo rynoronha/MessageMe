@@ -18,9 +18,6 @@ var config = {
 
   firebase.initializeApp(config);
 
-
-
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -64,7 +61,10 @@ class App extends Component {
       const m = firebase.database().ref('messages/' + snapshot.key);
       m.remove();
     });
+  }
 
+  updateMessages(remainMessages) {
+    this.setState({messages: remainMessages });
   }
 
   render() {
@@ -98,6 +98,7 @@ class App extends Component {
             activeRoom={this.state.activeRoom}
             activeRoomKey={this.state.activeRoomKey}
             username={this.state.username}
+            updateMessages={this.updateMessages.bind(this)}
           />
         </div>
 

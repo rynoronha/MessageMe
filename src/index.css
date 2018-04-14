@@ -96,8 +96,9 @@ body {
 }
 
 .message {
-  margin-bottom: 5px;
+  margin-bottom: 7px;
   margin-right: 10px;
+  height: 70px;
 }
 
 .message-list {
@@ -158,5 +159,7 @@ body {
 }
 
 #delete-message {
-  margin-top: -135px;
+  margin-top: -127px;
+  background-color: #7F0019;
+  border: #7F0019;
 }
