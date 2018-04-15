@@ -20,16 +20,23 @@ class RoomList extends Component {
   }
 
   componentDidMount() {
-    this.roomsRef.on('value', snapshot => {
-       let rooms = [];
-       snapshot.forEach((room) => {
-         rooms.push(room);
-       })
-       console.log("Type of rooms:");
-       console.log(typeof rooms);
-       this.setState({ rooms: rooms })
+     this.roomsRef.on('child_added', snapshot => {
+       const room = snapshot.val();
+       room.key = snapshot.key;
+       this.setState({ rooms: this.state.rooms.concat( room ) })
+     });
+     this.roomsRef.on('child_changed', snapshot => {
+        const room = snapshot.val();
+        room.key = snapshot.key;
+        const editedRoom = { name: room.name, key: room.key};
+        const rooms = this.state.rooms.map( (r, i) => {
+          if (r.key === room.key) {
+            return editedRoom;
+          } else return r;
+        });
+        this.setState({ rooms: rooms })
+        console.log(this.state.rooms);
       });
-
    }
 
   handleClose() {
@@ -63,8 +70,6 @@ class RoomList extends Component {
       var updates = {};
       updates['rooms/' + roomKey + '/' + 'name'] = e.target.innerText
       this.props.firebase.database().ref().update(updates);
-      const rooms = this.roomsRef;
-      this.setState({ rooms: rooms });
     }
   }
 
@@ -84,7 +89,6 @@ class RoomList extends Component {
   }
 
   render() {
-    console.log(this.state.rooms);
      return (
        <section className="room-list">
         <h3 id="rooms-heading">Rooms</h3>

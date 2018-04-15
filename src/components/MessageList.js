@@ -33,7 +33,7 @@ class MessageList extends Component {
   keyPress(e) {
     if (e.keyCode === 13 ) {
       this.sendMessage(e);
-    }
+    } else return <p>{this.props.username} is typing ...</p>
   }
 
   sendMessage(e) {
@@ -71,6 +71,20 @@ class MessageList extends Component {
     }
   }
 
+  editMessage(messageKey, e) {
+    if (e.keyCode === 13 ) {
+      e.preventDefault();
+      var updates = {};
+      updates['messages/' + messageKey + '/' + 'content'] = e.target.innerText
+      this.props.firebase.database().ref().update(updates);
+    }
+  }
+
+  showTyping(e) {
+    console.log(e.keyCode);
+    return <p>{this.props.username} is typing ...</p>
+  }
+
    render() {
      return (
        <section className="message-list">
@@ -81,7 +95,10 @@ class MessageList extends Component {
 
             <div className="message" key={message.key}>
               <p className="message-username">{message.username}</p>
-              <p className="message-content">{message.content}</p>
+              <p className="message-content"
+                contenteditable="true"
+                onKeyDown={ (e) => this.editMessage(message.key, e) }>{message.content}
+              </p>
               <p className="message-time">{this.formatTime(message.sentAt)}</p>
               <Button id="delete-message"
                 bsStyle="danger"
@@ -90,15 +107,15 @@ class MessageList extends Component {
               </Button>
             </div>
 
-
-        
         )}
         </div>
+
         <div className='footer'>
-        <footer id="new-message-footer">
-          {this.showNewMessageform()}
-        </footer>
+          <footer id="new-message-footer">
+            {this.showNewMessageform()}
+          </footer>
         </div>
+
        </section>
      )
    }
