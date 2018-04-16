@@ -39,6 +39,24 @@ class App extends Component {
     message.key = snapshot.key;
     this.setState({ messages: this.state.messages.concat(message) });
    });
+
+   this.messagesRef.on('child_changed', snapshot => {
+      const message = snapshot.val();
+      message.key = snapshot.key;
+      const editedMessage = {
+        content: message.content,
+        key: message.key,
+        roomId: message.roomId,
+        sentAt: message.sentAt,
+        username: message.username
+      };
+      const messages = this.state.messages.map( (m, i) => {
+        if (m.key === message.key) {
+          return editedMessage;
+        } else return m;
+      });
+      this.setState({ messages: messages })
+    });
   }
 
   setActiveRoom(room) {

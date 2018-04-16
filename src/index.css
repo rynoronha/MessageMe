@@ -50,7 +50,7 @@ body {
 }
 
 #new-room {
-  margin-left: 100px;
+  margin-left: 150%;
   margin-top: -40px;
 }
 
@@ -63,10 +63,8 @@ body {
   text-align: left;
   padding-top: 10px;
   padding-left: 5px;
-  border-radius: 5px;
-  border: 2px solid black;
+  border-bottom: 2px solid black;
 }
-
 
 .active-room {
   padding-top: 10px;
@@ -77,21 +75,18 @@ body {
 #delete-room {
   float: left;
   position: relative;
-  display: inline-block;
-  margin-left: 120px;
+  margin-left: 280%;
   margin-top: -34px;
-
 }
-
 
 .message:nth-child(odd){
   background-color: #cce5cc;
-  border-radius: 25px;
+  border-radius: 15px;
   border: 2px solid black;
 }
 
 .message:nth-child(even){
-  border-radius: 25px;
+  border-radius: 15px;
   border: 2px solid black;
 }
 

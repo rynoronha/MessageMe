@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, FormControl} from 'react-bootstrap';
+import { Alert, Button, Modal, FormControl} from 'react-bootstrap';
 
 class RoomList extends Component {
   constructor(props) {
@@ -35,7 +35,6 @@ class RoomList extends Component {
           } else return r;
         });
         this.setState({ rooms: rooms })
-        console.log(this.state.rooms);
       });
    }
 
@@ -70,6 +69,10 @@ class RoomList extends Component {
       var updates = {};
       updates['rooms/' + roomKey + '/' + 'name'] = e.target.innerText
       this.props.firebase.database().ref().update(updates);
+      alert("Your room name has been changed");
+      this.props.setActiveRoom(e.target.innerText);
+      this.props.setActiveRoomKey(roomKey);
+
     }
   }
 

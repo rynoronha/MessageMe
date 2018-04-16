@@ -10,20 +10,32 @@ class MessageList extends Component {
     };
   }
 
-   formatTime(date) {
-     var date = new Date(date);
-     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-     var year = date.getFullYear();
-     var month = months[date.getMonth()];
-     var day = date.getDate();
-     var hours = date.getHours();
-     var minutes = date.getMinutes();
-     var ampm = hours >= 12 ? 'pm' : 'am';
-     hours = hours % 12;
-     hours = hours ? hours : 12; // the hour '0' should be '12'
-     minutes = minutes < 10 ? '0'+ minutes : minutes;
-     var strTime = month + '/' + day + '/' + year + ' @ ' + hours + ':' + minutes + ' ' + ampm;
-     return strTime;
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
+  formatTime(currentDate) {
+    var date = new Date(currentDate);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = date.getFullYear();
+    var month = months[date.getMonth()];
+    var day = date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+ minutes : minutes;
+    var strTime = month + '/' + day + '/' + year + ' @ ' + hours + ':' + minutes + ' ' + ampm;
+    return strTime;
   }
 
   handleChange(e) {
@@ -48,12 +60,12 @@ class MessageList extends Component {
     this.setState({ show: false });
   }
 
-    deleteMessage(messageKey) {
-      const message = this.props.firebase.database().ref('messages/' + messageKey);
-      message.remove();
-      const remainMessages= this.props.messages.filter(message => message.key !== messageKey);
-      this.props.updateMessages(remainMessages);
-    }
+  deleteMessage(messageKey) {
+    const message = this.props.firebase.database().ref('messages/' + messageKey);
+    message.remove();
+    const remainMessages= this.props.messages.filter(message => message.key !== messageKey);
+    this.props.updateMessages(remainMessages);
+  }
 
   showNewMessageform() {
     if (this.props.activeRoom !== null) {
@@ -76,6 +88,7 @@ class MessageList extends Component {
       e.preventDefault();
       var updates = {};
       updates['messages/' + messageKey + '/' + 'content'] = e.target.innerText
+      alert("Your message has been edited");
       this.props.firebase.database().ref().update(updates);
     }
   }
@@ -114,6 +127,10 @@ class MessageList extends Component {
           <footer id="new-message-footer">
             {this.showNewMessageform()}
           </footer>
+        </div>
+
+        <div style={{ float:"left", clear: "both" }}
+             ref={(el) => { this.messagesEnd = el; }}>
         </div>
 
        </section>
