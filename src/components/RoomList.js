@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Button, Modal, FormControl} from 'react-bootstrap';
+import { Button, Modal, FormControl} from 'react-bootstrap';
 
 class RoomList extends Component {
   constructor(props) {
@@ -67,7 +67,7 @@ class RoomList extends Component {
     if (e.keyCode === 13 ) {
       e.preventDefault();
       var updates = {};
-      updates['rooms/' + roomKey + '/' + 'name'] = e.target.innerText
+      updates['rooms/' + roomKey + '/name'] = e.target.innerText
       this.props.firebase.database().ref().update(updates);
       alert("Your room name has been changed");
       this.props.setActiveRoom(e.target.innerText);

@@ -87,7 +87,7 @@ class MessageList extends Component {
     if (e.keyCode === 13 ) {
       e.preventDefault();
       var updates = {};
-      updates['messages/' + messageKey + '/' + 'content'] = e.target.innerText
+      updates['messages/' + messageKey + '/content'] = e.target.innerText
       alert("Your message has been edited");
       this.props.firebase.database().ref().update(updates);
     }
@@ -104,7 +104,7 @@ class MessageList extends Component {
         <h2 className="active-room">{this.props.activeRoom}</h2>
         <div className="message-container">
         {
-          this.props.messages.filter( message => message.roomId == this.props.activeRoomKey).map( message =>
+          this.props.messages.filter( message => message.roomId.toString() === this.props.activeRoomKey).map( message =>
 
             <div className="message" key={message.key}>
               <p className="message-username">{message.username}</p>
