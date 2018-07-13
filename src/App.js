@@ -96,7 +96,7 @@ class App extends Component {
             username={this.state.username}
           />
         </div>
-          <h1 className="App-title">Bloc Chat</h1>
+          <h1 className="App-title">MessageMe</h1>
         </header>
         <div className="room-list">
           <RoomList
